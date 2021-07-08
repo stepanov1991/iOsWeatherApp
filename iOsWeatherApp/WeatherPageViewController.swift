@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WeatherPageViewController.swift
 //  iOsWeatherApp
 //
 //  Created by user on 08.07.2021.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class WeatherPageViewController: UIPageViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .green
     }
-
+    
 
 }
-
