@@ -38,7 +38,7 @@ class WeatherViewController: UIViewController {
         return tableView
     }()
     
-    init(weatherData: WeatherData) {
+    init(weatherData: WeatherModel) {
         super.init(nibName: nil, bundle: nil)
         configureUI()
         getWeather(weatherData: weatherData)
@@ -48,7 +48,7 @@ class WeatherViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func getWeather(weatherData: WeatherData) {
+    func getWeather(weatherData: WeatherModel) {
         headerView.cityLabel.text = weatherData.city
         headerView.descriptionLabel.text = weatherData.description
         headerView.tempLabel.text = "\(weatherData.temp)°"
@@ -104,7 +104,6 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width/6, height: collectionView.frame.width/4)
     }
-
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 25
@@ -115,8 +114,6 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
         cell.backgroundColor = .clear
         return cell
     }
-    
-    
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource methods
@@ -147,9 +144,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             cell.backgroundColor = .clear
             cell.load(for: WeatherInfoType.allCases[indexPath.row])
             return cell
-            //            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as! WeatherInfoCell
-            //            cell.backgroundColor = .clear
-            //            return cell
         }
     }
 }

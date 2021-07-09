@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherPageViewController: UIPageViewController {
     
-    var weatherArray = [WeatherData]()
+    var weatherArray = [WeatherModel]()
     
     lazy var arrayWeatherViewController: [WeatherViewController] = {
         var weatherVC = [WeatherViewController]()
@@ -58,9 +58,9 @@ class WeatherPageViewController: UIPageViewController {
     }
     
     private func fethcWeatherData() {
-        let weather0 = WeatherData(city: "Хмельницький", description: "сонячно", temp: 28 , temp_min: 18, temp_max: 30)
-        let weather1 = WeatherData(city: "Львів", description: "дощ", temp: 25 , temp_min: 15, temp_max: 28)
-        let weather2 = WeatherData(city: "Київ", description: "хмарне небо", temp: 27 , temp_min: 20, temp_max: 28)
+        let weather0 = WeatherModel(city: "Хмельницький", description: "сонячно", temp: 28 , temp_min: 18, temp_max: 30)
+        let weather1 = WeatherModel(city: "Львів", description: "дощ", temp: 25 , temp_min: 15, temp_max: 28)
+        let weather2 = WeatherModel(city: "Київ", description: "хмарне небо", temp: 27 , temp_min: 20, temp_max: 28)
         weatherArray.append(weather0)
         weatherArray.append(weather1)
         weatherArray.append(weather2)
