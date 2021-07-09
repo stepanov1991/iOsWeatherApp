@@ -10,7 +10,7 @@ import UIKit
 struct WeatherData {
     let city : String
     let description : String
-    let temp : Float
-    let temp_min : Float
-    let temp_max : Float
+    let temp : Int
+    let temp_min : Int
+    let temp_max : Int
 }

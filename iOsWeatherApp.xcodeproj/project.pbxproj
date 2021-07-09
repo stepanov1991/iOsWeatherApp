@@ -14,6 +14,9 @@
 		CEC20D122696DAA200A23D31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC20D102696DAA200A23D31 /* LaunchScreen.storyboard */; };
 		CEC20D1A2696E13800A23D31 /* WeatherPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */; };
 		CEC20D1C2696EC7A00A23D31 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D1B2696EC7A00A23D31 /* WeatherData.swift */; };
+		CEC20D212696F1DC00A23D31 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D202696F1DC00A23D31 /* HeaderView.swift */; };
+		CEC20D242697337D00A23D31 /* HourWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D232697337D00A23D31 /* HourWeatherCell.swift */; };
+		CEC20D262697438A00A23D31 /* DayWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D252697438900A23D31 /* DayWeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		CEC20D132696DAA200A23D31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageViewController.swift; sourceTree = "<group>"; };
 		CEC20D1B2696EC7A00A23D31 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		CEC20D202696F1DC00A23D31 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		CEC20D232697337D00A23D31 /* HourWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourWeatherCell.swift; sourceTree = "<group>"; };
+		CEC20D252697438900A23D31 /* DayWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,11 +69,30 @@
 				CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */,
 				CEC20D1B2696EC7A00A23D31 /* WeatherData.swift */,
 				CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */,
+				CEC20D222697334400A23D31 /* CustomCells */,
+				CEC20D1D2696F0CB00A23D31 /* WeatherSubViews */,
 				CEC20D0E2696DAA200A23D31 /* Assets.xcassets */,
 				CEC20D102696DAA200A23D31 /* LaunchScreen.storyboard */,
 				CEC20D132696DAA200A23D31 /* Info.plist */,
 			);
 			path = iOsWeatherApp;
+			sourceTree = "<group>";
+		};
+		CEC20D1D2696F0CB00A23D31 /* WeatherSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				CEC20D202696F1DC00A23D31 /* HeaderView.swift */,
+			);
+			path = WeatherSubViews;
+			sourceTree = "<group>";
+		};
+		CEC20D222697334400A23D31 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				CEC20D232697337D00A23D31 /* HourWeatherCell.swift */,
+				CEC20D252697438900A23D31 /* DayWeatherCell.swift */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +164,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC20D242697337D00A23D31 /* HourWeatherCell.swift in Sources */,
 				CEC20D0A2696DA9D00A23D31 /* WeatherViewController.swift in Sources */,
+				CEC20D212696F1DC00A23D31 /* HeaderView.swift in Sources */,
 				CEC20D1C2696EC7A00A23D31 /* WeatherData.swift in Sources */,
 				CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */,
+				CEC20D262697438A00A23D31 /* DayWeatherCell.swift in Sources */,
 				CEC20D1A2696E13800A23D31 /* WeatherPageViewController.swift in Sources */,
 				CEC20D082696DA9D00A23D31 /* SceneDelegate.swift in Sources */,
 			);
