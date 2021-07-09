@@ -53,8 +53,6 @@ class HourWeatherCell: UICollectionViewCell {
         return view
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
@@ -102,8 +100,6 @@ class HourWeatherCell: UICollectionViewCell {
             timeLabel.bottomAnchor.constraint(equalTo: weatherImageIcon.topAnchor, constant: -5)
         ])
     }
-    
- 
     
     private func setupTempLabel() {
         contentView.addSubview(tempLabel)

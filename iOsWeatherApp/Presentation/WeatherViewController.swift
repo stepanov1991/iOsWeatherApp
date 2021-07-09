@@ -31,6 +31,8 @@ class WeatherViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.register(DayWeatherCell.self, forCellReuseIdentifier: "DayWeatherCell")
+        // reginster WeatherSummaryCell and WeatherInfoCell
+        
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         return tableView
     }()
@@ -101,6 +103,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width/6, height: collectionView.frame.width/4)
     }
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 25
@@ -116,18 +119,39 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource methods
-
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        if section == 0      { return 9  }
+        else if section == 0 { return 1  } // Summary
+        else                 { return 10 } // [WeatherInfoType].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
-        cell.backgroundColor = .clear
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
+            cell.backgroundColor = .clear
+            return cell
+        }
+        else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
+            cell.backgroundColor = .clear
+            return cell
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherSummaryCell", for: indexPath) as! WeatherSummaryCell
+//            cell.backgroundColor = .clear
+//            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
+            cell.backgroundColor = .clear
+            return cell
+            //            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as! WeatherInfoCell
+            //            cell.backgroundColor = .clear
+            //            return cell
+        }
     }
-    
-    
 }
 

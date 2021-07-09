@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B9ABB7426982D5D00891B0C /* WeatherInfoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABB7326982D5D00891B0C /* WeatherInfoType.swift */; };
+		2B9ABB7626982E7100891B0C /* WeatherSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABB7526982E7100891B0C /* WeatherSummaryCell.swift */; };
+		2B9ABB7826982E7E00891B0C /* WeatherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABB7726982E7E00891B0C /* WeatherInfoCell.swift */; };
 		CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D052696DA9D00A23D31 /* AppDelegate.swift */; };
 		CEC20D082696DA9D00A23D31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */; };
 		CEC20D0A2696DA9D00A23D31 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B9ABB7326982D5D00891B0C /* WeatherInfoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoType.swift; sourceTree = "<group>"; };
+		2B9ABB7526982E7100891B0C /* WeatherSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSummaryCell.swift; sourceTree = "<group>"; };
+		2B9ABB7726982E7E00891B0C /* WeatherInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoCell.swift; sourceTree = "<group>"; };
 		CEC20D022696DA9D00A23D31 /* iOsWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOsWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC20D052696DA9D00A23D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B9ABB79269834DF00891B0C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CEC20D052696DA9D00A23D31 /* AppDelegate.swift */,
+				CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2B9ABB7A269834E800891B0C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				CEC20D222697334400A23D31 /* CustomCells */,
+				CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */,
+				CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		2B9ABB7B269834FE00891B0C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2B9ABB7C2698350400891B0C /* Entities */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		2B9ABB7C2698350400891B0C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2B9ABB7326982D5D00891B0C /* WeatherInfoType.swift */,
+				CEC20D1B2696EC7A00A23D31 /* WeatherData.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2B9ABB7D2698351A00891B0C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEC20D0E2696DAA200A23D31 /* Assets.xcassets */,
+				CEC20D102696DAA200A23D31 /* LaunchScreen.storyboard */,
+				CEC20D132696DAA200A23D31 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CEC20CF92696DA9D00A23D31 = {
 			isa = PBXGroup;
 			children = (
@@ -64,16 +116,10 @@
 		CEC20D042696DA9D00A23D31 /* iOsWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				CEC20D052696DA9D00A23D31 /* AppDelegate.swift */,
-				CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */,
-				CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */,
-				CEC20D1B2696EC7A00A23D31 /* WeatherData.swift */,
-				CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */,
-				CEC20D222697334400A23D31 /* CustomCells */,
-				CEC20D1D2696F0CB00A23D31 /* WeatherSubViews */,
-				CEC20D0E2696DAA200A23D31 /* Assets.xcassets */,
-				CEC20D102696DAA200A23D31 /* LaunchScreen.storyboard */,
-				CEC20D132696DAA200A23D31 /* Info.plist */,
+				2B9ABB7D2698351A00891B0C /* Resources */,
+				2B9ABB7B269834FE00891B0C /* Data */,
+				2B9ABB79269834DF00891B0C /* App */,
+				2B9ABB7A269834E800891B0C /* Presentation */,
 			);
 			path = iOsWeatherApp;
 			sourceTree = "<group>";
@@ -89,8 +135,11 @@
 		CEC20D222697334400A23D31 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				CEC20D1D2696F0CB00A23D31 /* WeatherSubViews */,
 				CEC20D232697337D00A23D31 /* HourWeatherCell.swift */,
 				CEC20D252697438900A23D31 /* DayWeatherCell.swift */,
+				2B9ABB7526982E7100891B0C /* WeatherSummaryCell.swift */,
+				2B9ABB7726982E7E00891B0C /* WeatherInfoCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -165,13 +214,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC20D242697337D00A23D31 /* HourWeatherCell.swift in Sources */,
+				2B9ABB7826982E7E00891B0C /* WeatherInfoCell.swift in Sources */,
 				CEC20D0A2696DA9D00A23D31 /* WeatherViewController.swift in Sources */,
 				CEC20D212696F1DC00A23D31 /* HeaderView.swift in Sources */,
 				CEC20D1C2696EC7A00A23D31 /* WeatherData.swift in Sources */,
 				CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */,
 				CEC20D262697438A00A23D31 /* DayWeatherCell.swift in Sources */,
 				CEC20D1A2696E13800A23D31 /* WeatherPageViewController.swift in Sources */,
+				2B9ABB7626982E7100891B0C /* WeatherSummaryCell.swift in Sources */,
 				CEC20D082696DA9D00A23D31 /* SceneDelegate.swift in Sources */,
+				2B9ABB7426982D5D00891B0C /* WeatherInfoType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = iOsWeatherApp/Info.plist;
+				INFOPLIST_FILE = iOsWeatherApp/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,7 +381,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = iOsWeatherApp/Info.plist;
+				INFOPLIST_FILE = iOsWeatherApp/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
