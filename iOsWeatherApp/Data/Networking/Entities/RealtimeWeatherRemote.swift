@@ -13,6 +13,14 @@ struct RealtimeWeatherRemote: Codable {
 }
 
 struct CurrentWeatherRemote: Codable {
+    var tempCelsius : Float?
+    var condition : [Condition]?
+    var windKilometres : Float?
+    var windDirection : String?
+    var pressure : Float?
+    var precipitation : Float?
+    var feelsLike : Float?
+    var visibility : Float?
     /*"last_updated_epoch": 1625833800,
             "last_updated": "2021-07-09 13:30",
             "temp_c": 23.0,
@@ -41,4 +49,19 @@ struct CurrentWeatherRemote: Codable {
             "gust_mph": 7.4,
             "gust_kph": 11.9
         }*/
+    
+    struct Condition : Codable {
+        var text : String?
+    }
+    
+    enum CodingKeys:String, CodingKey {
+        case tempCelsius = "temp_c"
+        case condition
+        case windKilometres = "wind_mph"
+        case windDirection = "wind_dir"
+        case pressure = "pressure_mb"
+        case precipitation = "precip_mm"
+        case feelsLike = "feelslike_c"
+        case visibility = "vis_km"
+    }
 }

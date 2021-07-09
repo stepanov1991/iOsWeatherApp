@@ -50,7 +50,7 @@ class WeatherViewController: UIViewController {
     
     func getWeather(weatherData: WeatherModel) {
         headerView.cityLabel.text = weatherData.city
-        headerView.descriptionLabel.text = weatherData.description
+        headerView.descriptionLabel.text = weatherData.conditionText
         headerView.tempLabel.text = "\(weatherData.temp)°"
         headerView.maxTempLabel.text = "В: \(weatherData.temp_max)°"
         headerView.minTempLabel.text = "Н: \(weatherData.temp_min)°"

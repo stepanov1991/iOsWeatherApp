@@ -9,7 +9,7 @@ import UIKit
 
 struct WeatherModel {
     let city : String
-    let description : String
+    let conditionText  : String
     let temp : Int
     let temp_min : Int
     let temp_max : Int
