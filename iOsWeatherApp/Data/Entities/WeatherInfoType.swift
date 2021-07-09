@@ -7,7 +7,12 @@
 
 import Foundation
 
-enum WeatherInfoType {
+enum WeatherInfoType: CaseIterable {
+    static var allCases: [WeatherInfoType] {
+        return [.sunRise("5:50"), .sunSet("21:13"), .wind("3 м/с"), .feelslike("27"), .precipitation("0 см")]
+    }
+    
+    
     case sunRise(String)
     case sunSet(String)
     case wind(String)

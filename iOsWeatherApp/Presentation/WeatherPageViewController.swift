@@ -18,11 +18,20 @@ class WeatherPageViewController: UIPageViewController {
         }
         return weatherVC
     }()
+    
+    lazy var showVCListButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "list.dash"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(showVCListButtonPressed), for: UIControl.Event.touchUpInside)
+        return button
+    }()
 
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
-        self.view.backgroundColor = .lightGray
+        configureUI()
         fethcWeatherData()
         self.delegate = self
         self.dataSource = self
@@ -33,6 +42,21 @@ class WeatherPageViewController: UIPageViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureUI() {
+        self.view.backgroundColor = .lightGray
+        setupShowVCListButton()
+    }
+    
+    private func setupShowVCListButton() {
+        view.addSubview(showVCListButton)
+        NSLayoutConstraint.activate([
+            showVCListButton.heightAnchor.constraint(equalToConstant: 20),
+            showVCListButton.widthAnchor.constraint(equalToConstant: 20),
+            showVCListButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            showVCListButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
     private func fethcWeatherData() {
         let weather0 = WeatherData(city: "Хмельницький", description: "сонячно", temp: 28 , temp_min: 18, temp_max: 30)
         let weather1 = WeatherData(city: "Львів", description: "дощ", temp: 25 , temp_min: 15, temp_max: 28)
@@ -41,7 +65,13 @@ class WeatherPageViewController: UIPageViewController {
         weatherArray.append(weather1)
         weatherArray.append(weather2)
     }
+    
+    @objc func showVCListButtonPressed() {
+        print("showVCListButtonPressed")
+    }
 }
+
+// MARK: - UIPageViewControllerDelegate and UIPageViewControllerDataSource methods
 
 extension WeatherPageViewController : UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     

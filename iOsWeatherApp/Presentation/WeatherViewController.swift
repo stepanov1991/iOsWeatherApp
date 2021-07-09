@@ -28,11 +28,12 @@ class WeatherViewController: UIViewController {
     
     lazy var dayWeatherTableView : UITableView = {
         let tableView = UITableView()
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         tableView.register(DayWeatherCell.self, forCellReuseIdentifier: "DayWeatherCell")
-        // reginster WeatherSummaryCell and WeatherInfoCell
-        
+        tableView.register(WeatherSummaryCell.self, forCellReuseIdentifier: "WeatherSummaryCell")
+        tableView.register(WeatherInfoCell.self, forCellReuseIdentifier: "WeatherInfoCell")
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         return tableView
     }()
@@ -75,7 +76,7 @@ class WeatherViewController: UIViewController {
         hoursWeatherCollectioView.delegate = self
         hoursWeatherCollectioView.backgroundColor = .clear
         NSLayoutConstraint.activate([
-            hoursWeatherCollectioView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 100),
+            hoursWeatherCollectioView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 50),
             hoursWeatherCollectioView.heightAnchor.constraint(equalTo: hoursWeatherCollectioView.widthAnchor, multiplier: 0.25),
             hoursWeatherCollectioView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             hoursWeatherCollectioView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -89,7 +90,7 @@ class WeatherViewController: UIViewController {
         dayWeatherTableView.dataSource = self
         NSLayoutConstraint.activate([
             dayWeatherTableView.topAnchor.constraint(equalTo: hoursWeatherCollectioView.bottomAnchor),
-            dayWeatherTableView.heightAnchor.constraint(equalToConstant: 200),
+            dayWeatherTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             dayWeatherTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dayWeatherTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
@@ -126,8 +127,8 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0      { return 9  }
-        else if section == 0 { return 1  } // Summary
-        else                 { return 10 } // [WeatherInfoType].count
+        else if section == 1 { return 1  } // Summary
+        else                 { return 5 } // [WeatherInfoType].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -137,16 +138,14 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherSummaryCell", for: indexPath) as! WeatherSummaryCell
             cell.backgroundColor = .clear
             return cell
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherSummaryCell", for: indexPath) as! WeatherSummaryCell
-//            cell.backgroundColor = .clear
-//            return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DayWeatherCell", for: indexPath) as! DayWeatherCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as! WeatherInfoCell
             cell.backgroundColor = .clear
+            cell.load(for: WeatherInfoType.allCases[indexPath.row])
             return cell
             //            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherInfoCell", for: indexPath) as! WeatherInfoCell
             //            cell.backgroundColor = .clear
