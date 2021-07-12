@@ -37,6 +37,7 @@ final class WeatherService: ServiceProtocol {
                 
                 if let entity = entity(ofType: RealtimeWeatherRemote.self, from: data) {
                     complition(entity, nil)
+//                    let realtimeWeather = WeatherModel(city: (entity.location?.name)!, conditionText: (entity.current?.condition.text)!, temp: (entity.current?.tempCelsius)!, temp_min: 19, temp_max: 29)
                 }
             }
         task.resume()
