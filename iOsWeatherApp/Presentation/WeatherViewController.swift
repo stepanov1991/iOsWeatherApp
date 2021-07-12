@@ -37,11 +37,20 @@ class WeatherViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         return tableView
     }()
-    
-    init(weatherData: WeatherModel) {
-        super.init(nibName: nil, bundle: nil)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         configureUI()
-        getWeather(weatherData: weatherData)
+        // getWeather(weatherData: self.weatherData)
+        WeatherRepository.realite(city: "London") { weather, error in
+            if let error = error {
+                // show error in UIAlertController
+            } else if let weatheer = weather {
+                DispatchQueue.main.async {
+                    // update UI
+                }
+            }
+        }
     }
     
     required init?(coder: NSCoder) {

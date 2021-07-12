@@ -9,4 +9,10 @@ import UIKit
 
 struct WeatherData: Codable {
     
+    
+    static func from(remote:RealtimeWeatherRemote) -> WeatherData {
+        var wd = WeatherData()
+        // wd.temp = remote.temp
+        return wd
+    }
 }
