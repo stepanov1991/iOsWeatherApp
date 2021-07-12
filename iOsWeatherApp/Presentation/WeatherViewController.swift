@@ -42,12 +42,16 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         // getWeather(weatherData: self.weatherData)
-        WeatherRepository.realite(city: "London") { weather, error in
-            if let error = error {
-                // show error in UIAlertController
-            } else if let weatheer = weather {
+        // Get background Queue
+        DispatchQueue.global().async {
+            WeatherRepository.realite(city: "London") { weather, error in
+                // Get Main queue
                 DispatchQueue.main.async {
-                    // update UI
+                    if let error = error {
+                        // show error in UIAlertController
+                    } else if let weatheer = weather {
+                       // update UI
+                    }
                 }
             }
         }
