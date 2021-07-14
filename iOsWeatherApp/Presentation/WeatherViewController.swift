@@ -14,6 +14,7 @@ class WeatherViewController: UIViewController {
     var hourWeather: [Hour]?
     var forecastDayArray: [ForecastDay]?
     var weatherArray: [WeatherInfoType]?
+    var locationManage = LocationManager()
     
     lazy var headerView: HeaderView = {
         let view = HeaderView()
@@ -43,24 +44,20 @@ class WeatherViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         getWeatherForecastData()
         configureUI()
-        
-
     }
     
     private func getWeatherForecastData() {
-        WeatherRepository.forecast(city: "London") { [weak self] weather, error in
+        WeatherRepository.forecast(city: locationManage.locationArray[0]) { [weak self] weather, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print(error.localizedDescription)
-                                   // show error in UIAlertController
+                    // show error in UIAlertController
                 } else if let weather = weather {
-                                  // self?.updateWeather(weatherData: weather)
                     let currentDate = Date()
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -87,15 +84,6 @@ class WeatherViewController: UIViewController {
             }
             
         }
-    }
-    
-//    func updateWeather(weatherData: WeatherForecastData) {
-//        headerView.tempLabel.text = "\(weatherData.temp ?? 0.0)°"
-//        headerView.descriptionLabel.text = weatherData.condition
-//        headerView.cityLabel.text = weatherData.city
-//    }
-    
-    func updaweWeatherInfo(weatherData: WeatherData) {
     }
     
     private func configureUI() {
@@ -154,8 +142,7 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HoursWeatherCell", for: indexPath) as! HourWeatherCell
         cell.backgroundColor = .clear
-         let hour = hourWeather?[indexPath.item]
-        
+        let hour = hourWeather?[indexPath.item]
         cell.fethHoursWeather(weather: hour)
         return cell
     }
@@ -195,7 +182,6 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource {
             if let weather = weatherArray?[indexPath.row] {
                 cell.load(for: weather)
             }
-            
             return cell
         }
     }
