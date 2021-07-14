@@ -9,7 +9,7 @@ import UIKit
 
 class DayWeatherCell: UITableViewCell {
     
-    lazy var dayLabel : UILabel = {
+    lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -19,47 +19,43 @@ class DayWeatherCell: UITableViewCell {
         return label
     }()
     
-    lazy var weatherImageIcon : UIImageView = {
+    lazy var weatherImageIcon: UIImageView = {
        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "cloud.rain.fill")
         image.tintColor = .white
         return image
     }()
     
-    lazy var rainSquareLabel : UILabel = {
+    lazy var rainChanceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "50%"
         label.textColor = .blue
         label.alpha = 0.5
         label.font = UIFont.boldSystemFont(ofSize: 10)
         return label
     }()
     
-    lazy var maxTempLabel : UILabel = {
+    lazy var maxTempLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "29"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
-    lazy var minTempLabel : UILabel = {
+    lazy var minTempLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "15"
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier : String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
     }
@@ -67,6 +63,25 @@ class DayWeatherCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    func fetchDaysWeathers(day: Day?){
+        maxTempLabel.text = String(Int((day?.maxTempC?.rounded() ?? 0))) + "°"
+        minTempLabel.text = String(Int((day?.minTempC?.rounded() ?? 0))) + "°"
+        if day?.rainChance == "0" {
+            rainChanceLabel.text = ""
+        } else {
+            rainChanceLabel.text = (day?.rainChance ?? "") + "%"
+        }
+        weatherImageIcon.downloaded(from: "https:" + (day?.condition?.icon ?? ""))
+    }
+    
+    func getdayofWeak(forecastDay: ForecastDay) {
+        let dayString = forecastDay.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dayDate = dateFormatter.date(from: dayString ?? "")
+        dayLabel.text = dayDate?.dayOfWeek()
+    }
+    
     private func configureUI() {
         setupDayLabel()
         setupWeatherImageIcon()
@@ -94,11 +109,11 @@ class DayWeatherCell: UITableViewCell {
     }
     
     private func setupRainSquareLabel() {
-        contentView.addSubview(rainSquareLabel)
+        contentView.addSubview(rainChanceLabel)
         NSLayoutConstraint.activate([
-            rainSquareLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 5),
-            rainSquareLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -5),
-            rainSquareLabel.leadingAnchor.constraint(equalTo: weatherImageIcon.trailingAnchor, constant: 5),
+            rainChanceLabel.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 5),
+            rainChanceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -5),
+            rainChanceLabel.leadingAnchor.constraint(equalTo: weatherImageIcon.trailingAnchor, constant: 5),
         ])
     }
     
@@ -119,5 +134,12 @@ class DayWeatherCell: UITableViewCell {
             maxTempLabel.trailingAnchor.constraint(equalTo: minTempLabel.leadingAnchor, constant: -10),
         ])
     }
-    
+}
+
+extension Date {
+    func dayOfWeek() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return dateFormatter.string(from: self).capitalized
+    }
 }

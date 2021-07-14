@@ -7,35 +7,46 @@
 
 import Foundation
 
-enum WeatherInfoType: CaseIterable {
-    static var allCases: [WeatherInfoType] {
-        return [.sunRise("5:50"), .sunSet("21:13"), .wind("3 м/с"), .feelslike("27"), .precipitation("0 см")]
-    }
+enum WeatherInfoType {
     
-    
-    case sunRise(String)
-    case sunSet(String)
+    case sunrise(String)
+    case sunset(String)
+    case rainChance(String)
+    case humidity(String)
     case wind(String)
     case feelslike(String)
-    case precipitation(String)
+    case precipitationInMM(String)
+    case pressure(String)
+    case visibility(String)
+    case uv(String)
     
     func title() -> String {
         switch self {
-        case .sunRise:       return "СХІД СОНЦЯ"
-        case .sunSet:        return "ЗАХДІ СОНЦЯ"
-        case .wind:          return "ВІТЕР"
-        case .feelslike:     return "ВІДЧУВАЄТЬСЯ ЯК"
-        case .precipitation: return "ОПАДИ"
+        case .sunrise:                return "SUNRISE"
+        case .sunset:                 return "SUNSET"
+        case .rainChance:             return "CHANCE OF RAIN"
+        case .humidity:               return "HUMIDITY"
+        case .wind:                   return "WIND"
+        case .feelslike:              return "FEELS LIKE"
+        case .precipitationInMM:      return "PRECIPITATION"
+        case .pressure:               return "PRESSURE"
+        case .visibility:             return "VISIBILITY"
+        case .uv:                     return "UV INDEX"
         }
     }
     
     func value() -> String {
         switch self {
-        case .sunRise(let value):         return value
-        case .sunSet(let value):          return value
-        case .wind(let value):            return value
-        case .feelslike(let value):       return value
-        case .precipitation(let value):   return value
+        case .sunrise(let value):                return value
+        case .sunset(let value):                 return value
+        case .rainChance(let value):             return value
+        case .humidity(let value):               return value
+        case .wind(let value):                   return value
+        case .feelslike(let value):              return value
+        case .precipitationInMM(let value):      return value
+        case .pressure(let value):               return value
+        case .visibility(let value):             return value
+        case .uv(let value):                     return value
         }
     }
 }

@@ -20,6 +20,9 @@
 		2B9ABB7626982E7100891B0C /* WeatherSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABB7526982E7100891B0C /* WeatherSummaryCell.swift */; };
 		2B9ABB7826982E7E00891B0C /* WeatherInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9ABB7726982E7E00891B0C /* WeatherInfoCell.swift */; };
 		2BB71012269C22CE00BC6818 /* WeatherRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB71011269C22CE00BC6818 /* WeatherRepository.swift */; };
+		CE84B52B269C69F6007A6DBF /* WeatherForecastRemote .swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B52A269C69F6007A6DBF /* WeatherForecastRemote .swift */; };
+		CE84B52E269C73FA007A6DBF /* ConditionRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B52D269C73FA007A6DBF /* ConditionRemote.swift */; };
+		CE84B538269D6450007A6DBF /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B537269D6450007A6DBF /* ForecastData.swift */; };
 		CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D052696DA9D00A23D31 /* AppDelegate.swift */; };
 		CEC20D082696DA9D00A23D31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */; };
 		CEC20D0A2696DA9D00A23D31 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */; };
@@ -47,6 +50,9 @@
 		2B9ABB7526982E7100891B0C /* WeatherSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSummaryCell.swift; sourceTree = "<group>"; };
 		2B9ABB7726982E7E00891B0C /* WeatherInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoCell.swift; sourceTree = "<group>"; };
 		2BB71011269C22CE00BC6818 /* WeatherRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRepository.swift; sourceTree = "<group>"; };
+		CE84B52A269C69F6007A6DBF /* WeatherForecastRemote .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherForecastRemote .swift"; sourceTree = "<group>"; };
+		CE84B52D269C73FA007A6DBF /* ConditionRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRemote.swift; sourceTree = "<group>"; };
+		CE84B537269D6450007A6DBF /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		CEC20D022696DA9D00A23D31 /* iOsWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOsWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC20D052696DA9D00A23D31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEC20D072696DA9D00A23D31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 				2B9ABB7326982D5D00891B0C /* WeatherInfoType.swift */,
 				CEC20D1B2696EC7A00A23D31 /* WeatherModel.swift */,
 				CEC20D292698759400A23D31 /* WeatherData.swift */,
+				CE84B537269D6450007A6DBF /* ForecastData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -161,7 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				2B311DDA269886DE00D6AB45 /* WAError.swift */,
+				CE84B52D269C73FA007A6DBF /* ConditionRemote.swift */,
 				2B311DD62698849700D6AB45 /* RealtimeWeatherRemote.swift */,
+				CE84B52A269C69F6007A6DBF /* WeatherForecastRemote .swift */,
 				2B311DD8269884DC00D6AB45 /* LocationRemote.swift */,
 			);
 			path = Entities;
@@ -307,13 +316,16 @@
 				2B9ABB7826982E7E00891B0C /* WeatherInfoCell.swift in Sources */,
 				CEC20D0A2696DA9D00A23D31 /* WeatherViewController.swift in Sources */,
 				CEC20D212696F1DC00A23D31 /* HeaderView.swift in Sources */,
+				CE84B52E269C73FA007A6DBF /* ConditionRemote.swift in Sources */,
 				2B311DC926987A7600D6AB45 /* NetworkingConfiguration.swift in Sources */,
 				CEC20D1C2696EC7A00A23D31 /* WeatherModel.swift in Sources */,
 				CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */,
 				CEC20D262697438A00A23D31 /* DayWeatherCell.swift in Sources */,
+				CE84B52B269C69F6007A6DBF /* WeatherForecastRemote .swift in Sources */,
 				2BB71012269C22CE00BC6818 /* WeatherRepository.swift in Sources */,
 				2B311DD72698849700D6AB45 /* RealtimeWeatherRemote.swift in Sources */,
 				2B311DD32698821400D6AB45 /* WeatherService.swift in Sources */,
+				CE84B538269D6450007A6DBF /* ForecastData.swift in Sources */,
 				2B311DCB26987BB300D6AB45 /* RequestPath.swift in Sources */,
 				2B311DDD269887A400D6AB45 /* ServiceProtocol.swift in Sources */,
 				CEC20D1A2696E13800A23D31 /* WeatherPageViewController.swift in Sources */,

@@ -14,12 +14,12 @@ class WeatherPageViewController: UIPageViewController {
     lazy var arrayWeatherViewController: [WeatherViewController] = {
         var weatherVC = [WeatherViewController]()
         for weather in weatherArray {
-            weatherVC.append(WeatherViewController(weatherData: weather))
+            weatherVC.append(WeatherViewController())
         }
         return weatherVC
     }()
     
-    lazy var showVCListButton : UIButton = {
+    lazy var showVCListButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "list.dash"), for: .normal)
@@ -29,7 +29,7 @@ class WeatherPageViewController: UIPageViewController {
     }()
 
     
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
         configureUI()
         fethcWeatherData()
@@ -73,7 +73,7 @@ class WeatherPageViewController: UIPageViewController {
 
 // MARK: - UIPageViewControllerDelegate and UIPageViewControllerDataSource methods
 
-extension WeatherPageViewController : UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+extension WeatherPageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewController = viewController as? WeatherViewController else {return nil}

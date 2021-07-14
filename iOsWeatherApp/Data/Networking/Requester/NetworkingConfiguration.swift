@@ -18,7 +18,7 @@ struct NetworkConfiguration {
     
     public static var baseURL:String {
         switch environment {
-        case .production: return "http://api.weatherapi.com"
+        case .production: return "api.weatherapi.com"
         case .stage:      return ""
         }
     }

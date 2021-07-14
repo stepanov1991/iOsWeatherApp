@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherInfoCell: UITableViewCell {
     
-    lazy var titleLabel : UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -19,7 +19,7 @@ class WeatherInfoCell: UITableViewCell {
         return label
     }()
     
-    lazy var valueLabel : UILabel = {
+    lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -29,7 +29,7 @@ class WeatherInfoCell: UITableViewCell {
         return label
     }()
     
-    let bottomLineView : UIView = {
+    let bottomLineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 0.5
@@ -37,7 +37,7 @@ class WeatherInfoCell: UITableViewCell {
         return view
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier : String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
     }

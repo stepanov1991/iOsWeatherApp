@@ -9,7 +9,7 @@ import UIKit
 
 class HeaderView: UIView {
     
-    lazy var cityLabel : UILabel = {
+    lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -18,7 +18,7 @@ class HeaderView: UIView {
         return label
     }()
     
-    lazy var descriptionLabel : UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -27,7 +27,7 @@ class HeaderView: UIView {
         return label
     }()
     
-    lazy var tempLabel : UILabel = {
+    lazy var tempLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -36,7 +36,7 @@ class HeaderView: UIView {
         return label
     }()
     
-    lazy var maxTempLabel : UILabel = {
+    lazy var maxTempLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -45,7 +45,7 @@ class HeaderView: UIView {
         return label
     }()
     
-    lazy var minTempLabel : UILabel = {
+    lazy var minTempLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center

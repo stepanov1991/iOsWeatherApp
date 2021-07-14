@@ -11,10 +11,10 @@ struct LocationRemote: Codable {
     var name:String?
     var region:String?
     var country:String?
-    var latitude:Float?
-    var longitude:Float?
+    var latitude:Double?
+    var longitude:Double?
     var timeZoneId:String?
-    var localtimeEpoch:String?
+    var localtimeEpoch:Int?
     var localtime:String?
     
     enum CodingKeys:String, CodingKey {

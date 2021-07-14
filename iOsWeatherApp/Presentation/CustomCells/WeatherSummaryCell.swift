@@ -9,18 +9,17 @@ import UIKit
 
 class WeatherSummaryCell: UITableViewCell {
     
-    lazy var summaryLabel : UILabel = {
+    lazy var summaryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
-        label.text = "Сьогодні наразі сонячно, температура пілніметься до 30, ввечері впаде до 17"
         label.textColor = .white
         label.numberOfLines = 0
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
-    let topLineView : UIView = {
+    let topLineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 0.5
@@ -28,7 +27,7 @@ class WeatherSummaryCell: UITableViewCell {
         return view
     }()
     
-    let bottomLineView : UIView = {
+    let bottomLineView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 0.5
@@ -37,7 +36,7 @@ class WeatherSummaryCell: UITableViewCell {
     }()
     
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier : String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
     }
@@ -45,6 +44,12 @@ class WeatherSummaryCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func getSummaryof(day: Day?){
+        summaryLabel.text = "Today is \(day?.condition?.text?.lowercased() ?? ""), the temperature will rise to \(day?.maxTempC ?? 0), in the evening will fall to \(day?.minTempC ?? 0)"
+
+    }
+    
     private func configureUI() {
         setupTopLineView()
         setupSummaryLabel()
