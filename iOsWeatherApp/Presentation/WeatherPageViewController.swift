@@ -9,16 +9,10 @@ import UIKit
 
 class WeatherPageViewController: UIPageViewController {
     
-    var locationArray = LocationManager().locationArray
+    var locationArray = LocationManager.locationArray
     
-    lazy var arrayWeatherViewController: [WeatherViewController] = {
-        var weatherVC = [WeatherViewController]()
-        for city in locationArray {
-            weatherVC.append(WeatherViewController())
-        }
-        return weatherVC
-    }()
-    
+    lazy var arrayWeatherViewController = calculateWeatherViewControllers()
+        
     lazy var showVCListButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +22,6 @@ class WeatherPageViewController: UIPageViewController {
         return button
     }()
     
-    
-
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
         configureUI()
@@ -40,6 +32,16 @@ class WeatherPageViewController: UIPageViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .locationArrayDidChange, object: nil)
+    }
+    
+    @objc
+    private func reload() {
+        arrayWeatherViewController = calculateWeatherViewControllers()
     }
     
     private func configureUI() {
@@ -55,6 +57,16 @@ class WeatherPageViewController: UIPageViewController {
             showVCListButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             showVCListButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    private func calculateWeatherViewControllers() -> [WeatherViewController] {
+        var weatherVC = [WeatherViewController]()
+        for location in locationArray {
+            let vc      = WeatherViewController()
+            vc.location = location
+            weatherVC.append(vc)
+        }
+        return weatherVC
     }
     
     @objc func showVCListButtonPressed() {

@@ -15,6 +15,12 @@ class WeatherViewController: UIViewController {
     var forecastDayArray: [ForecastDay]?
     var weatherArray: [WeatherInfoType]?
     var locationManage = LocationManager()
+    var location:String? {
+        didSet {
+            guard let location = location else { return }
+            getWeatherForecastData(for:location)
+        }
+    }
     
     lazy var headerView: HeaderView = {
         let view = HeaderView()
@@ -38,21 +44,20 @@ class WeatherViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
-        tableView.register(DayWeatherCell.self, forCellReuseIdentifier: "DayWeatherCell")
+        tableView.register(DayWeatherCell.self, forCellReuseIdentifier:     "DayWeatherCell")
         tableView.register(WeatherSummaryCell.self, forCellReuseIdentifier: "WeatherSummaryCell")
-        tableView.register(WeatherInfoCell.self, forCellReuseIdentifier: "WeatherInfoCell")
+        tableView.register(WeatherInfoCell.self, forCellReuseIdentifier:    "WeatherInfoCell")
         tableView.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getWeatherForecastData()
         configureUI()
     }
     
-    private func getWeatherForecastData() {
-        WeatherRepository.forecast(city: locationManage.locationArray[0]) { [weak self] weather, error in
+    private func getWeatherForecastData(for location:String) {
+        WeatherRepository.forecast(city: location) { [weak self] weather, error in
             DispatchQueue.main.async {
                 if let error = error {
                     print(error.localizedDescription)

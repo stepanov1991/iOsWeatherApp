@@ -16,7 +16,7 @@ struct WeatherData: Codable {
     var visibility: Int?
     var windKilometres: Double?
     var pressure: Int?
-    var feelsLike: Int?
+    var feelsLike: Double?
     var humidity: Int?
     var uv: Int?
     

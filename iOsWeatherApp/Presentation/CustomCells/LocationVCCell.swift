@@ -38,7 +38,14 @@ class LocationVCCell: UITableViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 40)
         return label
     }()
-   
+    
+    var location:String?  {
+        didSet {
+            guard let location = location else { return }
+            getWeatherForecastData(for:location)
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureUI()
@@ -79,5 +86,39 @@ class LocationVCCell: UITableViewCell {
             locationLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -10),
             locationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 15),
         ])
+    }
+    
+    private func getWeatherForecastData(for location:String) {
+        WeatherRepository.forecast(city: location) { [weak self] weather, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print(error.localizedDescription)
+                    // show error in UIAlertController
+                } else if let weather = weather {
+//                    let currentDate = Date()
+//                    let dateFormatter = DateFormatter()
+//                    dateFormatter.dateFormat = "yyyy-MM-dd"
+//                    let currentDateString = dateFormatter.string(from: currentDate)
+//                    self?.headerView.cityLabel.text = weather.name
+//                    self?.headerView.tempLabel.text = "\(weather.tempC ?? 0)°"
+//                    self?.headerView.descriptionLabel.text = weather.conditionText
+//                    self?.currentDay = weather.forecastDay?.first(where: { ($0.date ?? "") == currentDateString })
+//                    self?.headerView.maxTempLabel.text = "\(self?.currentDay?.day?.maxTempC ?? 0)°"
+//                    self?.headerView.minTempLabel.text = "\(self?.currentDay?.day?.minTempC ?? 0)°"
+//                    self?.hourWeather = self?.currentDay?.hour?.filter({ (hours: Hour) -> Bool in
+//                        let timeString = hours.time
+//                        let dateFormatter = DateFormatter()
+//                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+//                        let timeDate = dateFormatter.date(from: timeString ?? "")
+//                        let currentDate = Date()
+//                        return timeDate ?? Date() >= currentDate
+//                    })
+//                    self?.forecastDayArray = weather.forecastDay
+//                    self?.weatherArray = weather.toWeatherInfoArray()
+//                    self?.hoursWeatherCollectioView.reloadData()
+//                    self?.dayWeatherTableView.reloadData()
+                }
+            }
+        }
     }
 }

@@ -40,17 +40,22 @@ class LocationsViewController: UIViewController {
 
         ])
     }
+    
+    /// this should be inside the delete button callback
+    private func remove(location:String) {
+        // let location = LocationManager.locationArray[indexPath.row]
+        LocationManager.remove(location: location)
+    }
 }
 
 extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return LocationManager.locationArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationVCCell", for: indexPath) as! LocationVCCell
+        cell.location = LocationManager.locationArray[indexPath.row]
         return cell
     }
-    
-    
 }

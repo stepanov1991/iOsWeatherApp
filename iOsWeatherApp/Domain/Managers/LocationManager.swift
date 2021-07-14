@@ -7,6 +7,22 @@
 
 import Foundation
 
+
+extension Notification.Name {
+    static let locationArrayDidChange = Notification.Name("locationArrayDidChange")
+}
+
 struct LocationManager {
-   static var locationArray = ["London", "Paris", "Madrid"]
+    private static var _locationArray = ["London", "Paris", "Madrid"]
+    static var locationArray:[String] { _locationArray }
+    
+    static func add(location:String) {
+        _locationArray.append(location)
+        NotificationCenter.default.post(name: .locationArrayDidChange, object: nil)
+    }
+    
+    static func remove(location:String) {
+        _locationArray.removeAll { $0 == location }
+        NotificationCenter.default.post(name: .locationArrayDidChange, object: nil)
+    }
 }

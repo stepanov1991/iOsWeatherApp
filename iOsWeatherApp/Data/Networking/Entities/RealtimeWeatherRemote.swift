@@ -21,7 +21,7 @@ struct CurrentWeatherRemote: Codable {
     var pressure: Int?
     var precipitationInPercent: Double?
     var precipitationInMM: Double?
-    var feelsLike: Int?
+    var feelsLike: Double?
     var visibility: Int?
     var humidity : Int?
     var uv : Int?

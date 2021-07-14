@@ -14,7 +14,8 @@ struct ForecastData {
     let windKph: Double?
     let pressureMB: Int?
     let precipMm, precipIn: Double?
-    let humidity, feelslikeC: Int?
+    let humidity:Int?
+    var feelslikeC: Double?
     let visKM, uv: Int?
     let forecastDay: [ForecastDay]?
     let sunrice: String?
