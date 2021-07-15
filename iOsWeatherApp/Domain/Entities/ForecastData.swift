@@ -21,6 +21,7 @@ struct ForecastData {
     let sunrice: String?
     let sunset: String?
     let rainChance: String?
+    let localtime: String?
     
     func toWeatherInfoArray() -> [WeatherInfoType]{
         var array = [WeatherInfoType]()
@@ -75,7 +76,7 @@ struct ForecastData {
                             forecastDay: remote.forecast?.forecastday?.map(ForecastDay.from),
                             sunrice: remote.forecast?.forecastday?[0].astro?.sunrise,
                             sunset: remote.forecast?.forecastday?[0].astro?.sunset,
-                            rainChance: remote.forecast?.forecastday?[0].day?.rainChance)
+                            rainChance: remote.forecast?.forecastday?[0].day?.rainChance, localtime: remote.location?.localtime)
 }
 }
 struct ForecastDay {

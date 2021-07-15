@@ -13,7 +13,7 @@ extension Notification.Name {
 }
 
 struct LocationManager {
-    private static var _locationArray = ["London", "Paris", "Madrid"]
+    private static var _locationArray = ["London", "Paris", "Madrid", "Kiev", "Lviv", "Khmelnytskyy"]
     static var locationArray:[String] { _locationArray }
     
     static func add(location:String) {

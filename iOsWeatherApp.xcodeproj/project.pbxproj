@@ -23,6 +23,7 @@
 		CE1C9201269EE81300C4C3C6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C9200269EE81300C4C3C6 /* LocationManager.swift */; };
 		CE1C9203269F040800C4C3C6 /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C9202269F040800C4C3C6 /* LocationsViewController.swift */; };
 		CE1C9205269F087700C4C3C6 /* LocationVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1C9204269F087700C4C3C6 /* LocationVCCell.swift */; };
+		CE73281126A01B850054EDA1 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE73281026A01B850054EDA1 /* SearchLocationViewController.swift */; };
 		CE84B52B269C69F6007A6DBF /* WeatherForecastRemote .swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B52A269C69F6007A6DBF /* WeatherForecastRemote .swift */; };
 		CE84B52E269C73FA007A6DBF /* ConditionRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B52D269C73FA007A6DBF /* ConditionRemote.swift */; };
 		CE84B538269D6450007A6DBF /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84B537269D6450007A6DBF /* ForecastData.swift */; };
@@ -55,6 +56,7 @@
 		CE1C9200269EE81300C4C3C6 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		CE1C9202269F040800C4C3C6 /* LocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		CE1C9204269F087700C4C3C6 /* LocationVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVCCell.swift; sourceTree = "<group>"; };
+		CE73281026A01B850054EDA1 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		CE84B52A269C69F6007A6DBF /* WeatherForecastRemote .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherForecastRemote .swift"; sourceTree = "<group>"; };
 		CE84B52D269C73FA007A6DBF /* ConditionRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRemote.swift; sourceTree = "<group>"; };
 		CE84B537269D6450007A6DBF /* ForecastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				CEC20D192696E13800A23D31 /* WeatherPageViewController.swift */,
 				CEC20D092696DA9D00A23D31 /* WeatherViewController.swift */,
 				CE1C9202269F040800C4C3C6 /* LocationsViewController.swift */,
+				CE73281026A01B850054EDA1 /* SearchLocationViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				CEC20D212696F1DC00A23D31 /* HeaderView.swift in Sources */,
 				CE84B52E269C73FA007A6DBF /* ConditionRemote.swift in Sources */,
 				2B311DC926987A7600D6AB45 /* NetworkingConfiguration.swift in Sources */,
+				CE73281126A01B850054EDA1 /* SearchLocationViewController.swift in Sources */,
 				CEC20D062696DA9D00A23D31 /* AppDelegate.swift in Sources */,
 				CEC20D262697438A00A23D31 /* DayWeatherCell.swift in Sources */,
 				CE84B52B269C69F6007A6DBF /* WeatherForecastRemote .swift in Sources */,

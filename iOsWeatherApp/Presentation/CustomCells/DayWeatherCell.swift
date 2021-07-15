@@ -104,6 +104,8 @@ class DayWeatherCell: UITableViewCell {
         NSLayoutConstraint.activate([
             weatherImageIcon.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 5),
             weatherImageIcon.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,constant: -5),
+            weatherImageIcon.widthAnchor.constraint(equalToConstant: 30),
+            weatherImageIcon.heightAnchor.constraint(equalToConstant: 30),
             weatherImageIcon.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
         ])
     }

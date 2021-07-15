@@ -12,6 +12,7 @@ class WeatherPageViewController: UIPageViewController {
     var locationArray = LocationManager.locationArray
     
     lazy var arrayWeatherViewController = calculateWeatherViewControllers()
+    var currentPageIndex = 0
         
     lazy var showVCListButton: UIButton = {
         let button = UIButton(type: .system)
@@ -24,10 +25,6 @@ class WeatherPageViewController: UIPageViewController {
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
-        configureUI()
-        self.delegate = self
-        self.dataSource = self
-        setViewControllers([arrayWeatherViewController[0]], direction: .forward, animated: true, completion: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +33,16 @@ class WeatherPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+        self.delegate = self
+        self.dataSource = self
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .locationArrayDidChange, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .locationArrayDidChange, object: nil)
+        setViewControllers([arrayWeatherViewController[currentPageIndex]], direction: .forward, animated: true, completion: nil)
     }
     
     @objc
@@ -73,17 +79,8 @@ class WeatherPageViewController: UIPageViewController {
         let vc = LocationsViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
-        print("showVCListButtonPressed")
     }
-    
-    @objc func onDidGetLocation(_ notification: Notification){
-        
-    }
-}
 
-
-extension Notification.Name {
-    static let getLocation = Notification.Name("didgetLocation")
 }
 
 // MARK: - UIPageViewControllerDelegate and UIPageViewControllerDataSource methods

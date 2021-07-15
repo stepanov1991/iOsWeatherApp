@@ -61,6 +61,9 @@ class WeatherViewController: UIViewController {
             DispatchQueue.main.async {
                 if let error = error {
                     print(error.localizedDescription)
+                    let alert =  UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
                     // show error in UIAlertController
                 } else if let weather = weather {
                     let currentDate = Date()
