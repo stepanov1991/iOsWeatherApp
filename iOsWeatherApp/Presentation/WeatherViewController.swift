@@ -22,6 +22,29 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    public var didAddButtonPressed: (() -> ())?
+    
+    
+    lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Cancel", for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(cancelButtonPressed), for: UIControl.Event.touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
+    lazy var addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Add", for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(addButtonPressed), for: UIControl.Event.touchUpInside)
+        button.isHidden = true
+        return button
+    }()
+    
     lazy var headerView: HeaderView = {
         let view = HeaderView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +121,8 @@ class WeatherViewController: UIViewController {
         setupHeaderView()
         setupHoursWeatherCollectioView()
         setupDayWeatherTableView()
+        setupCancelButton()
+        setupAddButton()
     }
     
     private func setupHeaderView() {
@@ -132,6 +157,39 @@ class WeatherViewController: UIViewController {
             dayWeatherTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dayWeatherTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+    
+    private func setupCancelButton() {
+        view.addSubview(cancelButton)
+        NSLayoutConstraint.activate([
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            cancelButton.widthAnchor.constraint(equalToConstant: 60),
+            cancelButton.heightAnchor.constraint(equalToConstant: 20),
+        ])
+    }
+    
+    private func setupAddButton() {
+        view.addSubview(addButton)
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            addButton.widthAnchor.constraint(equalToConstant: 40),
+            addButton.heightAnchor.constraint(equalToConstant: 20),
+        ])
+    }
+    
+    @objc func cancelButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func addButtonPressed() {
+        guard let location = location else { return }
+        LocationManager.add(location: location)
+        self.dismiss(animated: true, completion: nil)
+        didAddButtonPressed?()
+        
+
     }
 }
 

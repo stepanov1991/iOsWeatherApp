@@ -9,6 +9,8 @@ import UIKit
 
 class SearchLocationViewController: UIViewController {
     
+    public var didAddLocation: (() -> ())?
+    
     lazy var headerView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,15 +54,24 @@ class SearchLocationViewController: UIViewController {
     lazy var bottomView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .darkGray
-        view.alpha = 0.5
+        view.backgroundColor = .black
+        view.alpha = 0.8
         return view
+    }()
+    
+    lazy var searchResultsTableView : UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
+    
     
     private func configureUI() {
         view.backgroundColor = .clear
@@ -69,6 +80,7 @@ class SearchLocationViewController: UIViewController {
         setupSearchTextField()
         setupCancelButton()
         setupBottomView()
+        setupSearchResultsTableView()
     }
     
     private func setupHeaderView() {
@@ -119,6 +131,18 @@ class SearchLocationViewController: UIViewController {
             bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
+    private func setupSearchResultsTableView() {
+        bottomView.addSubview(searchResultsTableView)
+        searchResultsTableView.delegate = self
+        searchResultsTableView.dataSource = self
+        searchResultsTableView.backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            searchResultsTableView.topAnchor.constraint(equalTo: bottomView.topAnchor),
+            searchResultsTableView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor),
+            searchResultsTableView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor),
+            searchResultsTableView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+        ])
+    }
     
     @objc private func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
@@ -136,17 +160,43 @@ extension SearchLocationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         print(LocationManager.locationArray.count)
+        let vc = WeatherViewController()
         if let location = textField.text{
-            addLocation(location: location)
+            vc.location = location
         }
-        let vc = WeatherPageViewController()
-        print(vc.currentPageIndex)
-        print(LocationManager.locationArray.count)
-        vc.currentPageIndex = LocationManager.locationArray.count - 1
-        print(vc.currentPageIndex)
+        vc.view.backgroundColor = .gray
+        vc.addButton.isHidden = false
+        vc.cancelButton.isHidden = false
+        vc.didAddButtonPressed = { [weak self] in
+            self?.didAddLocation?()
+            self?.dismiss(animated: false, completion: nil)
+        }
         self.present(vc, animated: true, completion: nil)
         textField.text = ""
         return true
     }
+}
+
+// MARK: - TableView extension
+extension SearchLocationViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 15
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell : UITableViewCell = {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+            else {
+                return UITableViewCell(style: .default, reuseIdentifier: "cell")
+            }
+            return cell
+        }()
+//        cell.contentView.backgroundColor = .clear
+        cell.backgroundColor = .clear
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.text = "Test test test test test test test test test"
+        return cell
+    }
+    
     
 }

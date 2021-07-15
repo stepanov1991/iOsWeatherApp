@@ -42,7 +42,13 @@ class WeatherPageViewController: UIPageViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(reload), name: .locationArrayDidChange, object: nil)
+        setCurrentViewController()
+        
+    }
+    
+    func setCurrentViewController() {
         setViewControllers([arrayWeatherViewController[currentPageIndex]], direction: .forward, animated: true, completion: nil)
+        
     }
     
     @objc
@@ -78,6 +84,9 @@ class WeatherPageViewController: UIPageViewController {
     @objc func showVCListButtonPressed() {
         let vc = LocationsViewController()
         vc.modalPresentationStyle = .fullScreen
+        vc.didSelectPage = { [weak self]index in
+            self?.currentPageIndex = index
+        }
         self.present(vc, animated: true, completion: nil)
     }
 
@@ -110,8 +119,9 @@ extension WeatherPageViewController: UIPageViewControllerDelegate, UIPageViewCon
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return locationArray.count
     }
+    
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
+        return currentPageIndex
     }
     
 }

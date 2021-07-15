@@ -9,6 +9,8 @@ import UIKit
 
 class LocationsViewController: UIViewController {
     
+    public var didSelectPage: ((Int) -> ())?
+    
     lazy var locationTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,15 +35,13 @@ class LocationsViewController: UIViewController {
         configureUI()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("height")
-        print(locationTableView.contentSize.height)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableViewHeightConstraint.constant = locationTableView.contentSize.height + 80
+        updateTableViewHeight()
+    }
+    
+    func updateTableViewHeight() {
+        tableViewHeightConstraint.constant = CGFloat(LocationManager.locationArray.count * 60)
     }
     
     private func configureUI() {
@@ -80,8 +80,14 @@ class LocationsViewController: UIViewController {
     
     @objc private func searchLocationButtonPressed() {
         let vc = SearchLocationViewController()
+        vc.didAddLocation = { [weak self] in
+            self?.locationTableView.reloadData()
+            self?.updateTableViewHeight()
+        }
         self.present(vc, animated: true, completion: nil)
     }
+    
+
 }
 
 // MARK: - TableView extension
@@ -94,7 +100,6 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationVCCell", for: indexPath) as! LocationVCCell
         cell.location = LocationManager.locationArray[indexPath.row]
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -106,13 +111,19 @@ extension LocationsViewController: UITableViewDelegate, UITableViewDataSource {
             let location = LocationManager.locationArray[indexPath.row]
             remove(location: location)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            self.updateTableViewHeight()
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = WeatherPageViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.currentPageIndex = indexPath.row
-        self.present(vc, animated: true, completion: nil)
+        didSelectPage?(indexPath.row)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }
