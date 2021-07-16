@@ -6,10 +6,13 @@
 //
 
 import UIKit
+import MapKit
 
 class SearchLocationViewController: UIViewController {
     
     public var didAddLocation: (() -> ())?
+    var searchResults = [MKLocalSearchCompletion]()
+    var searchCompleter = MKLocalSearchCompleter()
     
     lazy var headerView : UIView = {
         let view = UIView()
@@ -27,19 +30,18 @@ class SearchLocationViewController: UIViewController {
         return label
     }()
     
-    lazy var searchTextField : UISearchTextField = {
-        let textField = UISearchTextField()
-        let whitePlaceholderText = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        textField.attributedPlaceholder = whitePlaceholderText
-        textField.textAlignment = .left
-        textField.layer.cornerRadius = 10
-        textField.layer.backgroundColor = UIColor.lightGray.cgColor
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.returnKeyType = .search
-        textField.autocapitalizationType = .words
-        textField.becomeFirstResponder()
-        textField.autocorrectionType = .no
-        return textField
+    lazy var searchBar : UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.layer.cornerRadius = 10
+        searchBar.clipsToBounds = true
+        searchBar.layer.backgroundColor = UIColor.lightGray.cgColor
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.returnKeyType = .search
+        searchBar.autocapitalizationType = .words
+        searchBar.becomeFirstResponder()
+        searchBar.autocorrectionType = .no
+        searchBar.placeholder = "Search"
+        return searchBar
     }()
     
     lazy var cancelButton: UIButton = {
@@ -70,6 +72,7 @@ class SearchLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        searchCompleter.delegate = self
     }
     
     
@@ -77,7 +80,7 @@ class SearchLocationViewController: UIViewController {
         view.backgroundColor = .clear
         setupHeaderView()
         setupTitleLabel()
-        setupSearchTextField()
+        setupSearchBar()
         setupCancelButton()
         setupBottomView()
         setupSearchResultsTableView()
@@ -100,14 +103,14 @@ class SearchLocationViewController: UIViewController {
         ])
     }
     
-    private func setupSearchTextField(){
-        headerView.addSubview(searchTextField)
-        searchTextField.delegate = self
+    private func setupSearchBar(){
+        headerView.addSubview(searchBar)
+        searchBar.delegate = self
         NSLayoutConstraint.activate([
-            searchTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            searchTextField.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20),
-            searchTextField.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10),
-            searchTextField.heightAnchor.constraint(equalToConstant: 30)
+            searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20),
+            searchBar.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10),
+            searchBar.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -115,10 +118,10 @@ class SearchLocationViewController: UIViewController {
         headerView.addSubview(cancelButton)
         NSLayoutConstraint.activate([
             cancelButton.heightAnchor.constraint(equalToConstant: 20),
-            cancelButton.centerYAnchor.constraint(equalTo: searchTextField.centerYAnchor),
+            cancelButton.centerYAnchor.constraint(equalTo: searchBar.centerYAnchor),
             cancelButton.widthAnchor.constraint(equalToConstant: 50),
             cancelButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -20),
-            cancelButton.leadingAnchor.constraint(equalTo: searchTextField.trailingAnchor, constant: 10)
+            cancelButton.leadingAnchor.constraint(equalTo: searchBar.trailingAnchor, constant: 10)
         ])
     }
     
@@ -131,6 +134,7 @@ class SearchLocationViewController: UIViewController {
             bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
+    
     private func setupSearchResultsTableView() {
         bottomView.addSubview(searchResultsTableView)
         searchResultsTableView.delegate = self
@@ -151,36 +155,29 @@ class SearchLocationViewController: UIViewController {
     private func addLocation(location:String) {
         LocationManager.add(location: location)
     }
-    
 }
-// MARK: - UITextField extension
-
-extension SearchLocationViewController: UITextFieldDelegate {
+// MARK: - MKLocalSearchCompleter extension
+extension SearchLocationViewController: MKLocalSearchCompleterDelegate {
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        print(LocationManager.locationArray.count)
-        let vc = WeatherViewController()
-        if let location = textField.text{
-            vc.location = location
-        }
-        vc.view.backgroundColor = .gray
-        vc.addButton.isHidden = false
-        vc.cancelButton.isHidden = false
-        vc.didAddButtonPressed = { [weak self] in
-            self?.didAddLocation?()
-            self?.dismiss(animated: false, completion: nil)
-        }
-        self.present(vc, animated: true, completion: nil)
-        textField.text = ""
-        return true
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        searchResults = completer.results
+        searchResultsTableView.reloadData()
+    }
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error)
     }
 }
-
+// MARK: - UISearchBar extension
+extension SearchLocationViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCompleter.queryFragment = searchText
+    }
+}
 // MARK: - TableView extension
 extension SearchLocationViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,12 +188,31 @@ extension SearchLocationViewController : UITableViewDelegate, UITableViewDataSou
             }
             return cell
         }()
-//        cell.contentView.backgroundColor = .clear
+        let searchResult = searchResults[indexPath.row]
         cell.backgroundColor = .clear
         cell.textLabel?.textColor = .white
-        cell.textLabel?.text = "Test test test test test test test test test"
+        cell.textLabel?.text = searchResult.title
+        cell.detailTextLabel?.text = searchResult.subtitle
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let result = searchResults[indexPath.row]
+        let searchRequest = MKLocalSearch.Request(completion: result)
+        let search = MKLocalSearch(request: searchRequest)
+        search.start { response, error in
+            guard let location = response?.mapItems[0].name else { return }
+            let vc = WeatherViewController()
+            vc.location = location
+            vc.view.backgroundColor = .gray
+            vc.addButton.isHidden = false
+            vc.cancelButton.isHidden = false
+            vc.didAddButtonPressed = { [weak self] in
+                self?.didAddLocation?()
+                self?.dismiss(animated: false, completion: nil)
+            }
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
 }
